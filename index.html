@@ -3,8 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ORBT Learn Dashboard</title>
+    <title>Orbt_Learn - Your Comprehensive Education Platform</title>
     <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #166088;
+            --accent-color: #4fc3f7;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -13,36 +21,125 @@
         }
         
         body {
-            background-color: #f8fafc;
-            color: #334155;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
         }
         
-        .dashboard-container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-        
-        .dashboard-header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        header {
+            background-color: var(--primary-color);
             color: white;
-            padding: 2rem;
-            border-radius: 10px 10px 0 0;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(74, 111, 165, 0.8), rgba(74, 111, 165, 0.8)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 0;
             text-align: center;
         }
         
-        .dashboard-header h1 {
+        .hero h1 {
             font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
         }
         
-        .dashboard-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 0 0 10px 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
         }
         
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 50px;
+            border: none;
+            font-size: 1rem;
+            padding-right: 50px;
+        }
+        
+        .search-box button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .search-box button:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--secondary-color);
+        }
+        
+        /* Features Grid from first design adapted to second design's style */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -51,11 +148,12 @@
         }
         
         .feature-card {
-            background: #f8fafc;
+            background: white;
             border-left: 4px solid;
             padding: 1.5rem;
             border-radius: 8px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
         
         /* Different colored borders for each card */
@@ -153,39 +251,211 @@
             border-radius: 8px;
         }
         
-        .cta-button {
+        .btn {
             display: inline-block;
-            background: #2a5298;
+            background-color: var(--accent-color);
             color: white;
             padding: 0.8rem 1.5rem;
             border-radius: 6px;
             text-decoration: none;
             font-weight: bold;
             margin-top: 1rem;
-            transition: background 0.3s ease;
+            transition: background-color 0.3s;
         }
         
-        .cta-button:hover {
-            background: #1e3c72;
+        .btn:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .pathways {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .pathway-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .pathway-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .card-img {
+            height: 180px;
+            overflow: hidden;
+        }
+        
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .pathway-card:hover .card-img img {
+            transform: scale(1.1);
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .card-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .card-content p {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+        
+        .doctor-path {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .doctor-path h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .path-step {
+            display: flex;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 40px;
+        }
+        
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 30px;
+            height: 30px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .step-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+        
+        .step-content p {
+            color: #666;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            margin: 1rem 0;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .social-icons {
+            margin: 1rem 0;
+        }
+        
+        .social-icons a {
+            color: white;
+            margin: 0 0.5rem;
+            font-size: 1.2rem;
         }
         
         @media (max-width: 768px) {
-            .features-grid {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .features-grid,
+            .pathways {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="dashboard-container">
-        <div class="dashboard-header">
-            <h1>ORBT Learn</h1>
-            <p>Your Comprehensive Education & Career Development Platform</p>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    Orbt_<span>Learn</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pathways">Learning Paths</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-        
-        <div class="dashboard-content">
-            <h2 style="color: #1e3c72; margin-bottom: 1rem;">Everything You Need for Career Success</h2>
-            <p style="margin-bottom: 1.5rem;">We provide end-to-end solutions for students and professionals at every stage of their journey.</p>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Your Comprehensive Education & Career Development Platform</h1>
+            <p>We provide end-to-end solutions for students and professionals at every stage of their journey.</p>
+            <div class="search-box">
+                <input type="text" placeholder="What do you want to learn? (e.g., 'become a doctor', 'learn web development')">
+                <button>🔍</button>
+            </div>
+        </div>
+    </section>
+    
+    <section id="features" class="section">
+        <div class="container">
+            <h2 class="section-title">Everything You Need for Career Success</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">We provide comprehensive solutions for students and professionals at every stage of their journey.</p>
             
             <div class="features-grid">
                 <div class="feature-card">
@@ -250,11 +520,48 @@
             </div>
             
             <div class="cta-section">
-                <h3 style="color: #1e3c72; margin-bottom: 1rem;">Ready to Transform Your Career?</h3>
+                <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Ready to Transform Your Career?</h3>
                 <p>Join thousands of learners who have accelerated their careers with ORBT Learn</p>
-                <a href="#" class="cta-button">Get Started Now</a>
+                <a href="#" class="btn">Get Started Now</a>
             </div>
         </div>
-    </div>
+    </section>
+    
+  
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About Orbt_Learn</h2>
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <p>Orbt_Learn is an educational platform dedicated to helping learners find the most efficient and effective paths to achieve their career goals. We analyze thousands of successful professionals in each field to determine the optimal learning journey.</p>
+                <p>Our mission is to democratize education by making clear roadmaps accessible to everyone, regardless of their background or starting point.</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo" style="margin-bottom: 1rem;">
+                    Orbt_<span>Learn</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Home</a>
+                    <a href="#features">Features</a>
+                    <a href="#pathways">Learning Paths</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+                <div class="social-icons">
+                    <a href="#">📱</a>
+                    <a href="#">📘</a>
+                    <a href="#">🐦</a>
+                    <a href="#">📸</a>
+                    <a href="#">🔗</a>
+                </div>
+                <p>© 2023 Orbt_Learn. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
